@@ -9,3 +9,5 @@ jobs:
         run: echo "Hola Tú"
       - name: Mostrar ubicación actual del runner
         run: pwd
+      - name: Listar archivos en el directorio actual
+        run: ls -la
