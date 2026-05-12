@@ -5,8 +5,8 @@ jobs:
   calculadora-job:
     runs-on: ubuntu-latest
     steps:
-    - name: cancel other workflows
-      uses: styfle/cancel-workflow-action
+    - name: Cancel build runs
+      uses: styfle/cancel-workflow-action@0.12.1
       with:
         workflow_id: calculadora.yaml
     - name: clonar repositorio
