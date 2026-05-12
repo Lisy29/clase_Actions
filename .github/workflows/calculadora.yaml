@@ -1,12 +1,14 @@
 name: Prueba calculadora
 on:
   push
-
-
 jobs:
   calculadora-job:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
+    - name: cancel other workflows
+      uses: styfle/cancel-workflow-action
+      with:
+        workflow_id: calculadora.yaml
     - name: clonar repositorio
       uses: actions/checkout@v4
     - name: probar operacion
@@ -14,6 +16,5 @@ jobs:
         echo "Probar operacion suma"
         echo "Instalar node.js"
         sudo apt-get update && sudo apt-get install -y nodejs npm
-        
-  
-    
+        echo "Ejecutar calculadora"
+        node calculadora.js 10 5
