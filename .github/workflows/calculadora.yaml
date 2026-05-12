@@ -14,7 +14,7 @@ jobs:
     - name: probar operacion
       run: |
         echo "Probar operacion suma"
-        echo "Instalar node.js"
+        echo "Instalar node.js"8
         sudo apt-get update && sudo apt-get install -y nodejs npm
-        echo "Ejecutar calculadora"
-        node calculadora.js 10 5
+        echo "crear archivo de pruebas"
+        echo "const calc = require('./calduladora'); console.log('Suma 2+3:', cal-sumar(2,3));" >test.js
