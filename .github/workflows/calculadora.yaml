@@ -1,0 +1,19 @@
+name: Prueba calculadora
+on:
+  push
+
+
+jobs:
+  calculadora-job:
+    runs-on: ubuntu-latest
+    steps: 
+    - name: clonar repositorio
+      uses: actions/checkout@v4
+    - name: probar operacion
+      run: |
+        echo "Probar operacion suma"
+        echo "Instalar node.js"
+        sudo apt-get update && sudo apt-get install -y nodejs npm
+        
+  
+    
