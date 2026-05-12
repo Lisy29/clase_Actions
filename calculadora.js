@@ -1,2 +1,5 @@
-const [a, b] = process.argv.slice(2).map(Number);
-console.log(`Suma: ${a+b} | Resta: ${a-b} | Multiplicación: ${a*b} | División: ${b?a/b:"Error"}`);
+const sumar = (a, b) => a + b;
+const restar = (a, b) => a - b;
+const multiplicar = (a, b) => a * b;
+const dividir = (a, b) => b ? a / b : "Error";
+module.exports = { sumar, restar, multiplicar, dividir };
