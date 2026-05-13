@@ -1,0 +1,56 @@
+name: CI — MauiMobileKiaRRHH
+
+ 
+
+on:
+  push:
+    branches: [main ]
+
+ 
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+ 
+
+    steps:
+      - name: Cancel previous redundant Builds
+        uses: styfle/cancel-workflow-action@0.13.1
+        with:
+          workflow_id: "ci-mauimobilekiarrhh.yml"
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+ 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+
+      - name: Install MAUI workloads
+        run: dotnet workload install maui-android --ignore-failed-sources
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x64
+
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/KIAPOMauiApp.csproj', '**/packages.config') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+
+      - name: Restore NuGet dependencies
+        run: dotnet restore "KIAPOMauiApp/KIAPOMauiApp.csproj" -p:TargetFramework=net9.0-android --verbosity detailed
+
+
+      - name: Build Android
+        run: dotnet build "KIAPOMauiApp/KIAPOMauiApp.csproj" -c Release -f net9.0-android --no-restore /p:AndroidSdkDirectory=$env:ANDROID_SDK_ROOT /p:EmbedAssembliesIntoApk=true
