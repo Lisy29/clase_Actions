@@ -1,4 +1,6 @@
+using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
+using Microsoft.Maui.Controls.Hosting;
 
 namespace KIAPOMauiApp;
 
