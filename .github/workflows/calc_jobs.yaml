@@ -27,6 +27,8 @@ jobs:
           run: |
             echo 'const calc = require("./calculadora"); console.log("Resultado de ${{ matrix.operacion }}:", calc.${{ matrix.operacion }}(5,2));' > test.js
             node test.js
+          env:
+           OPERACION: ${{vars.OPERACION}}
           
   reporte-final:
      runs-on: ubuntu-latest
