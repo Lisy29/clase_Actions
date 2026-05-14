@@ -8,10 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: instalar Node.js
+      - name: Instalar Node.js y pnpm
         run: |
           sudo apt-get update
-          sudo apt-get install -y nodejs pnpm
+          sudo apt-get install -y nodejs
+          corepack enable
+          corepack prepare pnpm@latest --activate
           
   pruebas-paralelas:
       runs-on: ubuntu-latest
